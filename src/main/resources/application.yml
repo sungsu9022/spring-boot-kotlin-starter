@@ -1,9 +1,22 @@
 server:
   port: 9022
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+
 
 spring:
   profiles:
     active: local
+
+---
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/templates/
+      suffix: .jsp
 
 ---
 spring:
