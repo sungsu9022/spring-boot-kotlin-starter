@@ -14,7 +14,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.sungsu.dev.app")
+@EnableJpaRepositories(basePackages = "com.example.starter")
 @EnableTransactionManagement
 @EnableJpaAuditing
 public class PersistenceConfig {
