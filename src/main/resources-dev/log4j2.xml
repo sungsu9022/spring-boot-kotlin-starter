@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+		<RollingFile name="all" fileName="logs/stater/app.log"
+					 append="true"
+					 filePattern="logs/stater/app.log.%d{yyyy-MM-dd}">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %X{client} [%-5p] (%F:%L) %m%n"/>
+			<ThresholdFilter level="DEBUG"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+			</Policies>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<AsyncLogger name="com" additivity="false" level="DEBUG">
+			<AppenderRef ref="all" />
+		</AsyncLogger>
+
+		<AsyncLogger name="org" additivity="false" level="DEBUG">
+			<AppenderRef ref="all" />
+		</AsyncLogger>
+
+		<Root level="DEBUG">
+			<AppenderRef ref="all"/>
+		</Root>
+	</Loggers>
+</Configuration>

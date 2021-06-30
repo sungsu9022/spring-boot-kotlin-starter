@@ -30,9 +30,23 @@ dependencies {
 	implementation("com.h2database:h2")
 	implementation("org.hibernate:hibernate-ehcache")
 
+	implementation("org.springframework.boot:spring-boot-starter-log4j2")
+	/**
+	 * log4j2의 Dependency 에 포함되면 해당 dependency 제거 필요
+	참고 : https://www.mkyong.com/logging/log4j-2-java-lang-noclassdeffounderror-com-lmax-disruptor-eventtranslatorvararg/
+	 */
+	implementation("com.lmax:disruptor:3.4.2")
+
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+configurations {
+	all {
+		exclude("org.springframework.boot",  "spring-boot-starter-logging")
+	}
 }
 
 tasks.withType<KotlinCompile> {
@@ -44,4 +58,15 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+
+val profile = project.findProperty("profile") ?: "local"
+println("profile : ${profile}");
+sourceSets {
+	main {
+		resources {
+			srcDirs(listOf("src/main/resources", "src/main/resources-${profile}"))
+		}
+	}
 }

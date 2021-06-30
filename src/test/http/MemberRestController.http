@@ -1,0 +1,5 @@
+### get member
+GET /members/1 HTTP/1.1
+Accept: *
+Content-Type: application/x-www-form-urlencoded
+Host: localhost:9022

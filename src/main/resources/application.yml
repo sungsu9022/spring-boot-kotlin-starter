@@ -10,6 +10,13 @@ server:
 spring:
   profiles:
     active: local
+  messages:
+    encoding: UTF-8
+
+logging:
+  level:
+    root: ERROR
+  config: classpath:log4j2.xml
 
 ---
 spring:
