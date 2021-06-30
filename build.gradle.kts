@@ -22,17 +22,31 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
-	implementation("org.springframework.boot:spring-boot-starter-tomcat")
-	implementation("org.apache.tomcat.embed:tomcat-embed-jasper")
-	implementation("javax.servlet:jstl")
-	//	runtimeOnly("com.h2database:h2")
+	//	runtimeOnly("com.h2database:h2") 추후 datasoruce 결정 후 제거
 	implementation("com.h2database:h2")
 	implementation("org.hibernate:hibernate-ehcache")
+
+	// Logging
+	implementation("org.springframework.boot:spring-boot-starter-log4j2")
+	/**
+	 * log4j2의 Dependency 에 포함되면 해당 dependency 제거 필요
+	참고 : https://www.mkyong.com/logging/log4j-2-java-lang-noclassdeffounderror-com-lmax-disruptor-eventtranslatorvararg/
+	 */
+	implementation("com.lmax:disruptor:3.4.2")
+	implementation("io.github.microutils:kotlin-logging:2.0.8")
+
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+configurations {
+	all {
+		exclude("org.springframework.boot",  "spring-boot-starter-logging")
+	}
 }
 
 tasks.withType<KotlinCompile> {
@@ -44,4 +58,15 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+
+val profile = project.findProperty("profile") ?: "local"
+println("profile : ${profile}");
+sourceSets {
+	main {
+		resources {
+			srcDirs(listOf("src/main/resources", "src/main/resources-${profile}"))
+		}
+	}
 }

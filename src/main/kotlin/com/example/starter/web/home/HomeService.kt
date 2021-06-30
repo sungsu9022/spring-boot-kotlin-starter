@@ -1,18 +1,13 @@
 package com.example.starter.web.home
 
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
+
+private val logger = KotlinLogging.logger {}
 
 @Service
 class HomeService {
 	fun test() {
-		print("HomeService test");
+		logger.debug { "HomeService test" };
 	}
-}
-
-@Service
-class HomeService2 {
-	fun test() {
-		print("HomeService2 test");
-	}
-
 }
