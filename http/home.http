@@ -1,0 +1,6 @@
+
+### home api
+GET /home
+Accept: application/json
+Host: localhost:9022
+Content-Type: application/json
